@@ -1,0 +1,58 @@
+#include<stdio.h>
+int merge(int *,int ,int ,int);
+void mergesort(int *,int ,int);
+main()
+{
+    int n,a[40],i,p,r;
+    printf("Enter total no of element in an array\n");
+    scanf("%d",&n);
+     printf("Enter total %d element in an array\n",n);
+    for(i=1;i<=n;i++)
+        scanf("%d",&a[i]);
+    printf("\nElement Before sorting\n");
+    for(i=1;i<=n;i++)
+        printf("%d\t",a[i]);
+        p=1;
+        mergesort(a,p,n);
+         printf("\nElement After sorting\n");
+    for(i=1;i<=n;i++)
+        printf("%d\t",a[i]);
+}
+void mergesort(int *a,int p,int r)
+{
+    int q;
+    if(p<r)
+    {
+    q=(p+r)/2;
+    mergesort(a,p,q);
+    mergesort(a,q+1,r);
+    merge(a,p,q,r);
+    }
+}
+int merge(int *a,int p,int q,int r)
+{
+    int n1,n2,l[30],m[30],i,j,k;
+    n1=q-p+1;
+    n2=r-q;
+    for(i=1;i<=n1;i++)
+        l[i]=a[p+i-1];
+    for(j=1;j<=n2;j++)
+        m[j]=a[q+j];
+    l[n1+1]=1234567897;
+    m[n2+1]=1234567898;
+    i=1;j=1;
+    for(k=p;k<=r;k++)
+    {
+        if(l[i]<=m[j])
+        {
+            a[k]=l[i];
+            i=i+1;
+        }
+        else
+        {
+            a[k]=m[j];
+            j=j+1;
+        }
+    }
+    return a;
+}
